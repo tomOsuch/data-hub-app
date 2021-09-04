@@ -27,6 +27,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.16'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation 'com.google.code.gson:gson'
 }
 
 test {
