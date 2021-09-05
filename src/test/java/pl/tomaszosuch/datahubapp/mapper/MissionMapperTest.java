@@ -7,7 +7,8 @@ import pl.tomaszosuch.datahubapp.domain.Mission;
 import pl.tomaszosuch.datahubapp.dto.MissionDto;
 import pl.tomaszosuch.datahubapp.enume.ImageryType;
 
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +22,7 @@ public class MissionMapperTest {
     @Test
     public void testMapToMission() {
         //Given
-        MissionDto missionDto = new MissionDto(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.now(), LocalDate.of(2021, 9,14));
+        MissionDto missionDto = new MissionDto(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
         //When
         Mission resultMap = missionMapper.mapToMission(missionDto);
         //Then
@@ -35,7 +36,7 @@ public class MissionMapperTest {
     @Test
     public void testMapToMissionDto() {
         //Given
-        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.now(), LocalDate.of(2021, 9,14));
+        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
         //When
         MissionDto resultMap  = missionMapper.mapToMissionDto(mission);
         //Then
@@ -49,7 +50,7 @@ public class MissionMapperTest {
     @Test
     public void testMapToMissionDtoList() {
         //Given
-        List<Mission> missions = List.of(new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.now(), LocalDate.of(2021, 9,14)));
+        List<Mission> missions = List.of(new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS)));
         //When
         List<MissionDto> resultMap = missionMapper.mapToMissionDtoList(missions);
         //Then

@@ -1,15 +1,13 @@
 package pl.tomaszosuch.datahubapp.repository;
 
-import org.aspectj.lang.annotation.After;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.tomaszosuch.datahubapp.domain.Mission;
 import pl.tomaszosuch.datahubapp.enume.ImageryType;
 
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +23,7 @@ public class MissionRepositoryTest {
     @Test
     public void testMissionFindById() {
         //Given
-        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.now(), LocalDate.of(2021, 9,14));
+        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
         missionRepository.save(mission);
         Long missionId = mission.getId();
         //When
@@ -44,7 +42,7 @@ public class MissionRepositoryTest {
     @Test
     public void testMissionFindAllAndSave() {
         //Given
-        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.now(), LocalDate.of(2021, 9,14));
+        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
         missionRepository.save(mission);
         Long missionId = mission.getId();
         //When
@@ -62,7 +60,7 @@ public class MissionRepositoryTest {
     @Test
     public void testMissionDeleteById() {
         //Given
-        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.now(), LocalDate.of(2021, 9,14));
+        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
         missionRepository.save(mission);
         Long missionId = mission.getId();
         //When

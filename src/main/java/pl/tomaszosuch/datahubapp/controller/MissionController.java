@@ -49,7 +49,7 @@ public class MissionController {
     }
 
     @DeleteMapping("/deleteMission/{id}")
-    public void deleteTask(@PathVariable Long id) {
+    public void deleteMission(@PathVariable Long id) {
         try {
             missionDbService.deleteMissionById(id);
         } catch (MissionNotFoundException e) {

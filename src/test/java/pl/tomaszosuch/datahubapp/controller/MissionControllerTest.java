@@ -15,7 +15,8 @@ import pl.tomaszosuch.datahubapp.enume.ImageryType;
 import pl.tomaszosuch.datahubapp.mapper.MissionMapper;
 import pl.tomaszosuch.datahubapp.service.MissionDbServiceImpl;
 
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +43,7 @@ public class MissionControllerTest {
     @Test
     public void testGetMissions() throws Exception {
         //Given
-        List<MissionDto> missionDtoList = List.of(new MissionDto(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.of(2021, 9, 1), LocalDate.of(2021, 9,14)));
+        List<MissionDto> missionDtoList = List.of(new MissionDto(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS)));
         when(missionMapper.mapToMissionDtoList(anyList())).thenReturn(missionDtoList);
         //When & Then
         mockMvc
@@ -52,16 +53,14 @@ public class MissionControllerTest {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(jsonPath("$[0].name", is("Test")))
-                .andExpect(jsonPath("$[0].imageryType", is("HYPERSPECTRAL")))
-                .andExpect(jsonPath("$[0].startDate", is("2021-09-01")))
-                .andExpect(jsonPath("$[0].endDate", is("2021-09-14")));
+                .andExpect(jsonPath("$[0].imageryType", is("HYPERSPECTRAL")));
     }
 
     @Test
     public void testGetMissionById() throws Exception {
         //Given
-        MissionDto missionDto = new MissionDto(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.of(2021, 9, 1), LocalDate.of(2021, 9,14));
-        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.of(2021, 9, 1), LocalDate.of(2021, 9,14));
+        MissionDto missionDto = new MissionDto(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
+        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
         when(missionDbService.getMissionById(anyLong())).thenReturn(Optional.of(mission));
         when(missionMapper.mapToMissionDto(any(Mission.class))).thenReturn(missionDto);
         //When & Then
@@ -72,15 +71,13 @@ public class MissionControllerTest {
                         .characterEncoding("UTF-8"))
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Test")))
-                .andExpect(jsonPath("$.imageryType", is("HYPERSPECTRAL")))
-                .andExpect(jsonPath("$.startDate", is("2021-09-01")))
-                .andExpect(jsonPath("$.endDate", is("2021-09-14")));
+                .andExpect(jsonPath("$.imageryType", is("HYPERSPECTRAL")));
     }
 
     @Test
     public void testDeleteMissionById() throws Exception {
         //Given
-        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.of(2021, 9, 1), LocalDate.of(2021, 9,14));
+        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
         //When & Then
         mockMvc
                 .perform(MockMvcRequestBuilders
@@ -93,8 +90,8 @@ public class MissionControllerTest {
     @Test
     public void testCreateMission() throws Exception {
         //Given
-        MissionDto missionDto = new MissionDto(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.of(2021, 9, 1), LocalDate.of(2021, 9,14));
-        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.of(2021, 9, 1), LocalDate.of(2021, 9,14));
+        MissionDto missionDto = new MissionDto(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
+        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
         when(missionMapper.mapToMission(any(MissionDto.class))).thenReturn(mission);
         when(missionDbService.saveMission(any(Mission.class))).thenReturn(mission);
 
@@ -115,8 +112,8 @@ public class MissionControllerTest {
     @Test
     public void testUpdateMission() throws Exception {
         //Given
-        MissionDto missionDto = new MissionDto(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.of(2021, 9, 1), LocalDate.of(2021, 9,14));
-        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.of(2021, 9, 1), LocalDate.of(2021, 9,14));
+        MissionDto missionDto = new MissionDto(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
+        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
         when(missionDbService.saveMission(any(Mission.class))).thenReturn(mission);
         when(missionMapper.mapToMission(any(MissionDto.class))).thenReturn(mission);
         when(missionMapper.mapToMissionDto(any(Mission.class))).thenReturn(missionDto);
@@ -132,8 +129,6 @@ public class MissionControllerTest {
                         .content(jsonContent))
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.name", is("Test")))
-                .andExpect(jsonPath("$.imageryType", is("HYPERSPECTRAL")))
-                .andExpect(jsonPath("$.startDate", is("2021-09-01")))
-                .andExpect(jsonPath("$.endDate", is("2021-09-14")));
+                .andExpect(jsonPath("$.imageryType", is("HYPERSPECTRAL")));
     }
 }

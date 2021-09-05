@@ -8,7 +8,8 @@ import pl.tomaszosuch.datahubapp.domain.Mission;
 import pl.tomaszosuch.datahubapp.enume.ImageryType;
 import pl.tomaszosuch.datahubapp.repository.MissionRepository;
 
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class MissionDbServiceImplTest {
     @Test
     public void testGetAllMission() {
         //Given
-        List<Mission> missions = List.of(new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.now(), LocalDate.of(2021, 9,14)));
+        List<Mission> missions = List.of(new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS)));
         when(missionRepository.findAll()).thenReturn(missions);
         //When
         List<Mission> resultMissionList = missionDbService.getAllMissions();
@@ -39,7 +40,7 @@ public class MissionDbServiceImplTest {
     @Test
     public void testGetMissionById() {
         //Given
-        List<Mission> missions = List.of(new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.now(), LocalDate.of(2021, 9,14)));
+        List<Mission> missions = List.of(new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS)));
         when(missionRepository.findById(missions.get(0).getId())).thenReturn(Optional.ofNullable(missions.get(0)));
         //When
         boolean resultFindMissionById = missionDbService.getMissionById(1L).isPresent();
@@ -50,7 +51,7 @@ public class MissionDbServiceImplTest {
     @Test
     public void testSaveMission() {
         //Given
-        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.now(), LocalDate.of(2021, 9,14));
+        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
         when(missionRepository.save(mission)).thenReturn(mission);
         //When
         Mission resultSaveMission = missionDbService.saveMission(mission);
@@ -65,7 +66,7 @@ public class MissionDbServiceImplTest {
     @Test
     public void testDeleteMissionById() {
         //Given
-        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, LocalDate.now(), LocalDate.of(2021, 9,14));
+        Mission mission = new Mission(1L, "Test", ImageryType.HYPERSPECTRAL, Instant.now(), Instant.now().plus(14, ChronoUnit.DAYS));
         Long missionId = mission.getId();
         //When
         missionDbService.deleteMissionById(missionId);
