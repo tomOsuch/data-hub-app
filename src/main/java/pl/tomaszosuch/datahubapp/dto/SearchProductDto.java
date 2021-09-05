@@ -10,11 +10,10 @@ import java.time.Instant;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MissionDto {
+public class SearchProductDto {
 
-    private Long id;
-    private String name;
+    private String missionName;
     private ImageryType imageryType;
-    private Instant startDate;
-    private Instant endDate;
+    private Instant dateFrom;
+    private Instant dateTo;
 }
