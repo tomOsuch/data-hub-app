@@ -35,6 +35,11 @@ public class MissionController {
         return missionMapper.mapToMissionDto(missionDbService.getMissionById(id).orElseThrow(MissionNotFoundException::new));
     }
 
+    @GetMapping("/getMissionByName/{name}")
+    public MissionDto getMissionByName(@PathVariable String name) {
+        return missionDbService.getMissionByName(name);
+    }
+
     @PostMapping(value = "/createMission", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createMission(@RequestBody MissionDto missionDto) {
         Mission mission = missionMapper.mapToMission(missionDto);

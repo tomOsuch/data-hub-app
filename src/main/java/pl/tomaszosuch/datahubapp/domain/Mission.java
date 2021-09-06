@@ -10,8 +10,8 @@ import java.util.List;
 @Entity
 @Table(name = "mission")
 @Data
-@AllArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class Mission {
 
     @Id
@@ -29,20 +29,4 @@ public class Mission {
 
     @Column(name = "end_date")
     private Instant endDate;
-
-    @OneToMany(
-            targetEntity = Product.class,
-            mappedBy = "product",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    private List<Product> products;
-
-    public Mission(Long id, String name, ImageryType imageryType, Instant startDate, Instant endDate) {
-        this.id = id;
-        this.name = name;
-        this.imageryType = imageryType;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
 }

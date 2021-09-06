@@ -21,8 +21,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @Bean
-    public BasicAuthenticationEntryPoint getMyBasicAuthenticationEntryPoint() {
-        return new BasicAuthenticationEntryPoint();
+    public MyBasicAuthenticationEntryPoint getMyBasicAuthenticationEntryPoint() {
+        return new MyBasicAuthenticationEntryPoint();
     }
 
     @Autowired

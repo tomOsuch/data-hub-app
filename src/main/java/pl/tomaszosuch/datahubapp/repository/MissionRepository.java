@@ -12,4 +12,5 @@ public interface MissionRepository extends CrudRepository<Mission, Long> {
     Optional<Mission> findById(Long id);
     Mission save(Mission mission);
     void deleteById(Long id);
+    Optional<Mission> findByName(String name);
 }
