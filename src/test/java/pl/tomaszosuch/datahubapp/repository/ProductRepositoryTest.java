@@ -51,7 +51,7 @@ public class ProductRepositoryTest {
     @Test
     public void testProductDeleteById() {
         //Given
-        Product product = new Product(1L, new Mission(), Instant.now(), 1.0, 2.0, 3.0, 4.0, new BigDecimal(100), "test_url");
+        Product product = new Product(1L, Instant.now(), 1.0, 2.0, 3.0, 4.0, new BigDecimal(100), "test_url");
         productRepository.save(product);
         Long productId = product.getId();
         //When

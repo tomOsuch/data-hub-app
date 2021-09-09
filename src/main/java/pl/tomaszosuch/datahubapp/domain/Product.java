@@ -6,9 +6,9 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-@Entity
-@Table(name = "product")
-@Data
+@Entity(name = "product")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
@@ -16,10 +16,6 @@ public class Product {
     @Id
     @GeneratedValue
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "mission_name")
-    private Mission mission;
 
     @NonNull
     private Instant acquisitionDate;
@@ -37,6 +33,10 @@ public class Product {
 
     @NonNull
     private String urlProduct;
+
+    @ManyToOne
+    @JoinColumn(name = "name")
+    private Mission mission;
 
     public Product(Long id, Instant acquisitionDate, Double latitude, Double longitude, Double altitude, Double fourthCoordinate, @NonNull BigDecimal price, @NonNull String urlProduct) {
         this.id = id;

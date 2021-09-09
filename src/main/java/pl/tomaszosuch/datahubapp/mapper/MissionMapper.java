@@ -1,13 +1,13 @@
 package pl.tomaszosuch.datahubapp.mapper;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.tomaszosuch.datahubapp.domain.Mission;
 import pl.tomaszosuch.datahubapp.dto.MissionDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class MissionMapper {
 
     public Mission mapToMission(final MissionDto missionDto) {

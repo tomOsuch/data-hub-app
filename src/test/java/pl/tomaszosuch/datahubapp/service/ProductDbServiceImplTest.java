@@ -5,7 +5,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.tomaszosuch.datahubapp.domain.Product;
-import pl.tomaszosuch.datahubapp.dto.MissionDto;
 import pl.tomaszosuch.datahubapp.dto.ProductDto;
 import pl.tomaszosuch.datahubapp.dto.SearchProductDto;
 import pl.tomaszosuch.datahubapp.enume.ImageryType;
@@ -88,8 +87,7 @@ public class ProductDbServiceImplTest {
     @Test
     public void testGetAllProductBySearchProductDto() {
         //Given
-        MissionDto missionDto = new MissionDto(1L, "Test", ImageryType.HYPERSPECTRAL, dateFromTest, dateToTest);
-        List<ProductDto> productDtoList = List.of(new ProductDto(1L, missionDto, Instant.now(), 1.0, 2.0, 3.0, 4.0, new BigDecimal(100), "test_url"));
+        List<ProductDto> productDtoList = List.of(new ProductDto(1L, Instant.now(), 1.0, 2.0, 3.0, 4.0, new BigDecimal(100), "test_url"));
 
         SearchProductDto searchProductDto = new SearchProductDto("Test", ImageryType.HYPERSPECTRAL, dateFromTest, dateToTest);
         //When

@@ -1,14 +1,14 @@
 package pl.tomaszosuch.datahubapp.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.tomaszosuch.datahubapp.domain.Product;
 import pl.tomaszosuch.datahubapp.dto.ProductDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class ProductMapper {
 
     private final MissionMapper missionMapper;
@@ -21,7 +21,6 @@ public class ProductMapper {
     public Product mapToProduct(final ProductDto productDto) {
         return new Product(
                 productDto.getId(),
-                missionMapper.mapToMission(productDto.getMissionDto()),
                 productDto.getAcquisitionDate(),
                 productDto.getLatitude(),
                 productDto.getLongitude(),
@@ -35,7 +34,6 @@ public class ProductMapper {
     public ProductDto mapToProductDto(final Product product) {
         return new ProductDto(
                 product.getId(),
-                missionMapper.mapToMissionDto(product.getMission()),
                 product.getAcquisitionDate(),
                 product.getLatitude(),
                 product.getLongitude(),

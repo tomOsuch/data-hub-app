@@ -7,9 +7,9 @@ import javax.persistence.*;
 import java.time.Instant;
 import java.util.List;
 
-@Entity
-@Table(name = "mission")
-@Data
+@Entity(name = "mission")
+@Getter
+@Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Mission {
@@ -18,7 +18,7 @@ public class Mission {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "mission_name")
+    @Column(name = "name")
     private String name;
 
     @Column(name = "imagery_type")
@@ -29,4 +29,20 @@ public class Mission {
 
     @Column(name = "end_date")
     private Instant endDate;
+
+    @OneToMany(
+            targetEntity = Product.class,
+            mappedBy = "mission",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Product> products;
+
+    public Mission(Long id, String name, ImageryType imageryType, Instant startDate, Instant endDate) {
+        this.id = id;
+        this.name = name;
+        this.imageryType = imageryType;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 }

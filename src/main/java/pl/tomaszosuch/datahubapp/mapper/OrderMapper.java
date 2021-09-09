@@ -1,13 +1,13 @@
 package pl.tomaszosuch.datahubapp.mapper;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.tomaszosuch.datahubapp.domain.Order;
 import pl.tomaszosuch.datahubapp.dto.OrderDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class OrderMapper {
 
     public Order mapToOrder(final OrderDto orderDto) {
