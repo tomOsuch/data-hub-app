@@ -8,9 +8,8 @@ import java.time.Instant;
 import java.util.List;
 
 @Entity(name = "mission")
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Mission {
 

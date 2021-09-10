@@ -1,13 +1,11 @@
 package pl.tomaszosuch.datahubapp.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
-@Entity
-@Table(name = "order")
+@Entity(name = "order")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,11 +13,22 @@ public class Order {
 
     @Id
     @GeneratedValue
+    @Column(name = "order_id")
     private Long id;
-
-    @Column(name = "product_id")
-    private Long productId;
 
     @Column(name = "user_name")
     private String userName;
+
+    @OneToMany(
+            targetEntity = Product.class,
+            mappedBy = "order",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Product> products;
+
+    public Order(Long id, String userName) {
+        this.id = id;
+        this.userName = userName;
+    }
 }
